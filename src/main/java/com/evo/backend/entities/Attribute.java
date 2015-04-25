@@ -8,16 +8,20 @@ import java.util.List;
  * Created by prashanth.a on 25/04/15.
  */
 public class Attribute {
-    public String id, type, text, title;
+    public String atid, type, text, title;
     public List<User> votesUp;
     public List<User> votesDown;
 
-    public String getId() {
-        return id;
+    public String getAtid() {
+        return atid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAtid(String atid) {
+        this.atid = atid;
+    }
+
+    public String getId() {
+        return atid;
     }
 
     public String getType() {

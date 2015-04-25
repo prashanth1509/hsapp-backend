@@ -35,4 +35,47 @@ public class Attributes {
         return attributeRepository.findById(room.getAttributesId());
     }
 
+    @RequestMapping(value = "/api/attributes/feedback", method = RequestMethod.GET)
+    public Object attributeFeedback(
+            @RequestParam(value = "rid", required = true) String rid,
+            @RequestParam(value = "username", required = true) String uname,
+            @RequestParam(value = "attribute_id", required = true) String aid,
+            @RequestParam(value = "feedback", required = true) Boolean isUp
+    ){
+        Room room = roomRepository.findById(rid);
+        AttributeCollection attributes = attributeRepository.findById(room.getAttributesId());
+
+        User uzer = new User();
+        uzer.setId(uname);
+        uzer.setName(uname);
+
+        int index = 0;
+        for(Attribute attribute : attributes.getAttributeList()){
+            if(attribute.getId().equals(aid)){
+                if(isUp){
+                    List<User> uppers = attributes.attributeList.get(index).getVotesUp();
+                    for(User user: uppers){
+                        if(user.getName().equals(uname)){
+                            return false;
+                        }
+                    }
+                    uppers.add(uzer);
+                }
+                else{
+                    List<User> booers = attributes.attributeList.get(index).getVotesDown();
+                    for(User user: booers){
+                        if(user.getName().equals(uname)){
+                            return false;
+                        }
+                    }
+                    booers.add(uzer);
+                }
+            }
+            index = index + 1;
+        }
+
+        attributeRepository.save(attributes);
+        return true;
+    }
+
 }

@@ -1,4 +1,3 @@
-contracts:
 
 GET: /api/<RID>/users
 PARAMS:
@@ -22,13 +21,17 @@ RESPONSE:
 			attribute [1..n]
 				id
 				type
+				title
 				text
-				likes - array(user_ids)
+				votesUp - array(user_ids)
+				votesDown - array(user_ids)
 
-GET: /api/<RID>/attributes
-PARAMS:
+POST: /api/<RID>/attributes/feedback
+PARAMS: aid, feedback 0/1
 RESPONSE:
+	true/false
 
+eg. http://localhost:8087/api/attributes/feedback?attribute_id=attr_formatted_security_deposit&rid=553bfa26a8269ba10b9ef81d&username=evo&feedback=true
 
 GET: /api/<RID>/content
 PARAMS:
@@ -45,7 +48,6 @@ RESPONSE:
 		length
 		lastContentTimestamp
 
-
 POST: /api/<RID>/content
 PARAMS:
 	user_id
@@ -57,3 +59,4 @@ RESPONSE:
 
 
 
+http://hsapp-backend.herokuapp.com/triggerinvite#1234

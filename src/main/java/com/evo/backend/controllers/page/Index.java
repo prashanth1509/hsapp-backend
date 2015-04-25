@@ -88,6 +88,7 @@ public class Index {
         Map<String,String> props = m.convertValue(attribs, Map.class);
         for (Map.Entry<String, String> entry : props.entrySet()){
             Attribute attr = new Attribute();
+            attr.setAtid("attr_" + entry.getKey());
             attr.setTitle(entry.getKey());
             attr.setText(entry.getValue());
             attr.setType("default");
