@@ -1,4 +1,4 @@
-<!Doctype HTML>
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>MyApp</title>

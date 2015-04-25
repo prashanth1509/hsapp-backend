@@ -2,9 +2,9 @@
 </div>
 
 <script type="text/javascript">
-$( document ).ready( function(){
+//$( document ).ready( function(){
     var model = ${modelJSON};
-    window.app.start(model);
+    console.log(model);
 </script>
 
 </body>
