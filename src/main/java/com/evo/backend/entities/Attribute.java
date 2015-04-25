@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Created by prashanth.a on 25/04/15.
  */
-@Document(collection = "attributes")
 public class Attribute {
     public String id, type, text, votes;
 
