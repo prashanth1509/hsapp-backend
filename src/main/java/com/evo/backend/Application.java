@@ -1,5 +1,7 @@
 package com.evo.backend;
 
+import com.evo.backend.entities.PropertyAttributes;
+import com.evo.backend.utils.AttributeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +23,7 @@ public class Application extends WebMvcConfigurerAdapter{
         if (webPort == null || webPort.isEmpty()) {
             webPort = "8087";
         }
+
         System.setProperty("server.port", webPort);
         SpringApplication.run(Application.class, args);
     }

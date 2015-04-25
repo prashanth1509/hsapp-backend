@@ -14,7 +14,7 @@ public class Room {
     @Id
     public String id;
 
-    public AttributeCollection attributes;
+    public String attributesId;
 
     public List<User> users;
 
@@ -26,14 +26,6 @@ public class Room {
         this.id = id;
     }
 
-    public AttributeCollection getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(AttributeCollection attributes) {
-        this.attributes = attributes;
-    }
-
     public List<User> getUsers() {
         return users;
     }
@@ -42,4 +34,11 @@ public class Room {
         this.users = users;
     }
 
+    public String getAttributesId() {
+        return attributesId;
+    }
+
+    public void setAttributesId(String attributesId) {
+        this.attributesId = attributesId;
+    }
 }

@@ -1,9 +1,12 @@
 package com.evo.backend.controllers.page;
 
+import com.evo.backend.datastores.AttributeRepository;
 import com.evo.backend.datastores.MessageRepository;
 import com.evo.backend.datastores.RoomRepository;
 import com.evo.backend.entities.*;
+import com.evo.backend.utils.AttributeGenerator;
 import com.evo.backend.utils.UIUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +28,15 @@ public class Index {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private AttributeRepository attributeRepository;
+
     @RequestMapping("/")
     public String IndexPage(
             @RequestParam(value = "pid", required = true) String pid,
             @RequestParam(value = "username", required = true) String uid,
             Map<String, Object>model
     ){
-
-        //check if room id exists or branch out
-
-        //get all attributes for this pid and populate db.
-        //add current user to users
 
         //Create myself
         User me = new User();
@@ -48,9 +49,11 @@ public class Index {
 
         //All attributes
         AttributeCollection attributes = new AttributeCollection();
+        this.updateAttributes(attributes, pid);
+        attributeRepository.save(attributes);
 
         Room room  = new Room();
-        room.setAttributes(attributes);
+        room.setAttributesId(attributes.getId());
         room.setUsers(users);
 
         //Save room
@@ -76,6 +79,22 @@ public class Index {
         model.put("modelJSON", UIUtils.getJSONString(model));
 
         return "index";
+    }
+
+    private void updateAttributes(AttributeCollection collection, String pid){
+        AttributeGenerator generator = new AttributeGenerator(pid);
+        PropertyAttributes attribs = generator.getAttributes();
+        ObjectMapper m = new ObjectMapper();
+        Map<String,String> props = m.convertValue(attribs, Map.class);
+        for (Map.Entry<String, String> entry : props.entrySet()){
+            Attribute attr = new Attribute();
+            attr.setTitle(entry.getKey());
+            attr.setText(entry.getValue());
+            attr.setType("default");
+            attr.setVotesDown(new ArrayList<User>());
+            attr.setVotesUp(new ArrayList<User>());
+            collection.addAttribute(attr);
+        }
     }
 
 }

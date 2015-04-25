@@ -2,11 +2,15 @@ package com.evo.backend.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
  * Created by prashanth.a on 25/04/15.
  */
 public class Attribute {
-    public String id, type, text, votes;
+    public String id, type, text, title;
+    public List<User> votesUp;
+    public List<User> votesDown;
 
     public String getId() {
         return id;
@@ -32,11 +36,27 @@ public class Attribute {
         this.text = text;
     }
 
-    public String getVotes() {
-        return votes;
+    public String getTitle() {
+        return title;
     }
 
-    public void setVotes(String votes) {
-        this.votes = votes;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<User> getVotesUp() {
+        return votesUp;
+    }
+
+    public void setVotesUp(List<User> votesUp) {
+        this.votesUp = votesUp;
+    }
+
+    public List<User> getVotesDown() {
+        return votesDown;
+    }
+
+    public void setVotesDown(List<User> votesDown) {
+        this.votesDown = votesDown;
     }
 }
