@@ -1,7 +1,10 @@
 package com.evo.backend.controllers.page;
 
+import com.evo.backend.datastores.MessageRepository;
+import com.evo.backend.datastores.RoomRepository;
 import com.evo.backend.entities.*;
 import com.evo.backend.utils.UIUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,13 @@ import java.util.Map;
  */
 @Controller
 public class Index {
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @Autowired
+    private MessageRepository messageRepository;
+
     @RequestMapping("/")
     public String IndexPage(
             @RequestParam(value = "pid", required = true) String pid,
@@ -29,7 +39,7 @@ public class Index {
 
         //Create myself
         User me = new User();
-        me.setId("id_" + uid);
+        me.setId(uid);
         me.setName(uid);
 
         //I'm one of the user
@@ -39,13 +49,23 @@ public class Index {
         //All attributes
         AttributeCollection attributes = new AttributeCollection();
 
-        //All messages
-        List<Message> messages = new ArrayList();
-
         Room room  = new Room();
         room.setAttributes(attributes);
         room.setUsers(users);
-        room.setMessages(messages);
+
+        //Save room
+        roomRepository.save(room);
+
+        //All messages
+        List<Message> messages = new ArrayList();
+        Message initMessage = new Message();
+        initMessage.setRid(room.getId());
+        initMessage.setAuthor("_app");
+        initMessage.setText("Room created.");
+        initMessage.setTime((int)System.currentTimeMillis()/1000);
+
+        //Create new message
+        messageRepository.save(initMessage);
 
         model.put("room", room);
         model.put("currentUser", me);

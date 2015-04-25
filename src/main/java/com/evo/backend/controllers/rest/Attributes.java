@@ -1,7 +1,11 @@
 package com.evo.backend.controllers.rest;
 
+import com.evo.backend.datastores.RoomRepository;
 import com.evo.backend.entities.Attribute;
+import com.evo.backend.entities.AttributeCollection;
+import com.evo.backend.entities.Room;
 import com.evo.backend.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,19 +18,22 @@ import java.util.List;
  * Created by prashanth.a on 25/04/15.
  */
 @RestController
-@RequestMapping("/")
 public class Attributes {
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @RequestMapping(value = "/api/attributes", method = RequestMethod.GET)
     public Object getAttributes(
             @RequestParam(value = "rid", required = true) String rid
     ){
-        Attribute attr = new Attribute();
 
-        List<Attribute> atts = new ArrayList();
-        atts.add(attr);
+        Room room = roomRepository.findById(rid);
 
-        return atts;
+        AttributeCollection roomAttributes = room.getAttributes();
+
+        return roomAttributes;
+
     }
 
 }
