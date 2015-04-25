@@ -1,5 +1,6 @@
 package com.evo.backend.controllers.rest;
 
+import com.evo.backend.datastores.AttributeRepository;
 import com.evo.backend.datastores.RoomRepository;
 import com.evo.backend.entities.Attribute;
 import com.evo.backend.entities.AttributeCollection;
@@ -23,17 +24,15 @@ public class Attributes {
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private AttributeRepository attributeRepository;
+
     @RequestMapping(value = "/api/attributes", method = RequestMethod.GET)
     public Object getAttributes(
             @RequestParam(value = "rid", required = true) String rid
     ){
-
         Room room = roomRepository.findById(rid);
-
-        AttributeCollection roomAttributes = room.getAttributes();
-
-        return roomAttributes;
-
+        return attributeRepository.findById(room.getAttributesId());
     }
 
 }

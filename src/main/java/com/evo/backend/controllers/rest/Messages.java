@@ -26,7 +26,7 @@ public class Messages {
             @RequestParam(value = "rid", required = true) String rid,
             @RequestParam(value = "timestamp", required = false) int fromTime
     ){
-        List<Message> messages = messageRepository.findByRidOrderByTime(rid);
+        List<Message> messages = messageRepository.findByRidOrderByTimeDesc(rid);
         if(fromTime>0){
             List<Message> filteredMessages = new ArrayList<Message>();
             for(Message msg: messages){
