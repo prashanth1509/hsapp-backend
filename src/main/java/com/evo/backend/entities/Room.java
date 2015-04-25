@@ -1,20 +1,20 @@
 package com.evo.backend.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 /**
  * Created by prashanth.a on 25/04/15.
  */
+@Document(collection = "rooms")
 public class Room {
 
     @Id
     public String id;
 
     public AttributeCollection attributes;
-
-    public List<Message> messages;
 
     public List<User> users;
 
@@ -42,11 +42,4 @@ public class Room {
         this.users = users;
     }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
 }

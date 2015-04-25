@@ -1,6 +1,7 @@
 package com.evo.backend.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
 /**
  * Created by prashanth.a on 25/04/15.
@@ -8,7 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "messages")
 public class Message {
 
-    public String author, time, type, attribute, meta, text;
+    @Id
+    public String id;
+
+    public String rid;
+
+    public String author, type, attribute, meta, text;
+    public Integer time;
 
     public String getAuthor() {
         return author;
@@ -16,14 +23,6 @@ public class Message {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getType() {
@@ -57,4 +56,29 @@ public class Message {
     public void setText(String text) {
         this.text = text;
     }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
 }
+
