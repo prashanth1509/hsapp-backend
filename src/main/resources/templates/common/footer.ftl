@@ -4,10 +4,7 @@
 <script type="text/javascript">
 $( document ).ready( function(){
     var model = ${modelJSON};
-    $.each(DRE, function(k, v){
-        v.init(model);
-    });
-});
+    window.app.start(model);
 </script>
 
 </body>
