@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface MessageRepository extends MongoRepository<Message, String> {
     public Message findById(String id);
-    public List<Message> findByRidOrderByTime(String rid);
+    public List<Message> findByRidOrderByTimeDesc(String rid);
 }
 
