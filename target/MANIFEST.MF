@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.evo.backend
+Build-Jdk: 1.7.0_71
+Built-By: prashanth.a
+Created-By: IntelliJ IDEA
+Main-Class: ${start-class}
+

@@ -1,0 +1,59 @@
+contracts:
+
+GET: /api/<RID>/users
+PARAMS:
+RESPONSE:
+	users
+		user [1..n]
+			name
+			id
+
+POST: /api/<RID>/users
+PARAMS: user_id, user_name
+RESPONSE:
+	ok/fail
+
+
+GET: /api/<RID>/attributes
+PARAMS:
+RESPONSE:
+	attributes
+		attribute-parent [1..n]
+			attribute [1..n]
+				id
+				type
+				text
+				likes - array(user_ids)
+
+GET: /api/<RID>/attributes
+PARAMS:
+RESPONSE:
+
+
+GET: /api/<RID>/content
+PARAMS:
+	timestamp - getContent after this time (optional)
+RESPONSE:
+	contents
+		content [1..n]
+			author
+			time
+			type - UP/DOWN
+			attribute
+			meta
+			text
+		length
+		lastContentTimestamp
+
+
+POST: /api/<RID>/content
+PARAMS:
+	user_id
+	attribute_id
+	UP/DOWN
+	text
+RESPONSE:
+	ok/fail
+
+
+
