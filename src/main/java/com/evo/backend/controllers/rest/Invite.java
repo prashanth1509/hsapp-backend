@@ -17,6 +17,12 @@ public class Invite {
     @Autowired
     private RoomRepository roomRepository;
 
+    @RequestMapping("/api/deleteAll")
+    public Object destroyer(){
+        roomRepository.deleteAll();
+        return null;
+    }
+
     @RequestMapping(value = "/api/invite", method = RequestMethod.GET)
     public Object getUsers(
             @RequestParam(value = "rid", required = true) String rid
