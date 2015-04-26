@@ -53,7 +53,7 @@ public class Messages {
         msg.setRid(rid);
         msg.setText(text);
         msg.setAuthor(uname);
-        msg.setTime((int)System.currentTimeMillis()/1000);
+        msg.setTime((int)(System.currentTimeMillis()/1000L));
         msg.setAttribute(aid);
         msg.setType(type);
 

@@ -79,7 +79,7 @@ public class Index {
             initMessage.setRid(room.getId());
             initMessage.setAuthor("_app");
             initMessage.setText("Room created.");
-            initMessage.setTime((int)System.currentTimeMillis()/1000);
+            initMessage.setTime((int)(System.currentTimeMillis()/1000L));
 
             //Create new message
             messageRepository.save(initMessage);
