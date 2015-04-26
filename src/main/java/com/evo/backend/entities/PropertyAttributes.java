@@ -2,6 +2,8 @@ package com.evo.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 /**
  * Created by prashanth.a on 25/04/15.
  */
@@ -18,6 +20,8 @@ public class PropertyAttributes {
             bedroom_count,
             bathroom_count,
             is_rent_negotiable;
+
+    private List<List<String>> images;
 
     public String getFormatted_rent() {
         return formatted_rent;
@@ -97,5 +101,13 @@ public class PropertyAttributes {
 
     public void setIs_rent_negotiable(String is_rent_negotiable) {
         this.is_rent_negotiable = is_rent_negotiable;
+    }
+
+    public List<List<String>> getImages() {
+        return images;
+    }
+
+    public void setImages(List<List<String>> images) {
+        this.images = images;
     }
 }

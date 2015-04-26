@@ -14,6 +14,8 @@ public class Room {
     @Id
     public String id;
 
+    public String pid;
+
     public String attributesId;
 
     public List<User> users;
@@ -40,5 +42,13 @@ public class Room {
 
     public void setAttributesId(String attributesId) {
         this.attributesId = attributesId;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }

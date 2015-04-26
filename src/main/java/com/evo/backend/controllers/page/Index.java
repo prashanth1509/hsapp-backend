@@ -43,38 +43,53 @@ public class Index {
         me.setId(uid);
         me.setName(uid);
 
-        //I'm one of the user
-        List<User> users = new ArrayList<User>();
-        users.add(me);
+        //remove this condition later
+        Room exists = roomRepository.findByPid(pid);
 
-        //All attributes
-        AttributeCollection attributes = new AttributeCollection();
-        this.updateAttributes(attributes, pid);
-        attributeRepository.save(attributes);
+        if(exists!=null){
 
-        Room room  = new Room();
-        room.setAttributesId(attributes.getId());
-        room.setUsers(users);
+            model.put("room", exists);
+            model.put("currentUser", me);
+            model.put("attributes", attributeRepository.findById(exists.getAttributesId()));
+            model.put("users", exists.getUsers());
+            model.put("messages", messageRepository.findByRidOrderByTimeDesc(exists.getId()));
 
-        //Save room
-        roomRepository.save(room);
+        }
+        else{
+            //I'm one of the user
+            List<User> users = new ArrayList<User>();
+            users.add(me);
 
-        //All messages
-        List<Message> messages = new ArrayList();
-        Message initMessage = new Message();
-        initMessage.setRid(room.getId());
-        initMessage.setAuthor("_app");
-        initMessage.setText("Room created.");
-        initMessage.setTime((int)System.currentTimeMillis()/1000);
+            //All attributes
+            AttributeCollection attributes = new AttributeCollection();
+            this.updateAttributes(attributes, pid);
+            attributeRepository.save(attributes);
 
-        //Create new message
-        messageRepository.save(initMessage);
+            Room room  = new Room();
+            room.setAttributesId(attributes.getId());
+            room.setUsers(users);
+            room.setPid(pid);
 
-        model.put("room", room);
-        model.put("currentUser", me);
-        model.put("attributes", attributes);
-        model.put("users", users);
-        model.put("messages", messages);
+            //Save room
+            roomRepository.save(room);
+
+            //All messages
+            List<Message> messages = new ArrayList();
+            Message initMessage = new Message();
+            initMessage.setRid(room.getId());
+            initMessage.setAuthor("_app");
+            initMessage.setText("Room created.");
+            initMessage.setTime((int)System.currentTimeMillis()/1000);
+
+            //Create new message
+            messageRepository.save(initMessage);
+
+            model.put("room", room);
+            model.put("currentUser", me);
+            model.put("attributes", attributes);
+            model.put("users", users);
+            model.put("messages", messages);
+        }
 
         model.put("modelJSON", UIUtils.getJSONString(model));
 
@@ -84,6 +99,10 @@ public class Index {
     private void updateAttributes(AttributeCollection collection, String pid){
         AttributeGenerator generator = new AttributeGenerator(pid);
         PropertyAttributes attribs = generator.getAttributes();
+        List<List<String>> images = attribs.getImages();
+
+        attribs.setImages(null);
+
         ObjectMapper m = new ObjectMapper();
         Map<String,String> props = m.convertValue(attribs, Map.class);
         for (Map.Entry<String, String> entry : props.entrySet()){
@@ -95,6 +114,19 @@ public class Index {
             attr.setVotesDown(new ArrayList<User>());
             attr.setVotesUp(new ArrayList<User>());
             collection.addAttribute(attr);
+        }
+
+        int count = 0;
+        for(List<String> image: images){
+            Attribute attr = new Attribute();
+            attr.setAtid("attr_image_" + count);
+            attr.setTitle(image.get(2));
+            attr.setText("https://is1-0.housingcdn.com" + "/" + image.get(0).trim() + "/large" + image.get(1).trim());
+            attr.setType("image");
+            attr.setVotesDown(new ArrayList<User>());
+            attr.setVotesUp(new ArrayList<User>());
+            collection.addAttribute(attr);
+            count += 1;
         }
     }
 

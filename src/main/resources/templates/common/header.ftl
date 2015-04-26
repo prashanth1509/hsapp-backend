@@ -13,4 +13,5 @@
 <body class="page">
 
     <div class="hasapp-header">
+        <span class="title">Collaborate</span>
     </div>
