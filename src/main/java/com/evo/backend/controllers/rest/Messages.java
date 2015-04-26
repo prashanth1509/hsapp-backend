@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.evo.backend.entities.Message;
 
 /**
@@ -34,9 +37,13 @@ public class Messages {
                     filteredMessages.add(msg);
                 }
             }
+            Map<String, Object> response= new HashMap();
+            response.put("messages", filteredMessages);
             return filteredMessages;
         }
-        return messages;
+        Map<String, Object> response= new HashMap();
+        response.put("messages", messages);
+        return response;
     }
 
     @RequestMapping(value = "/api/content/add", method = RequestMethod.GET)
