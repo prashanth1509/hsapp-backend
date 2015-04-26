@@ -4,9 +4,9 @@
     <title>MyApp</title>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="http://localhost:8080/php-apps/tmp/build/hsapp-latest.css"/>
-    <script src="http://localhost:8080/php-apps/tmp/build/jquery.js"></script>
-    <script src="http://localhost:8080/php-apps/tmp/build/react.min.js"></script>
+    <link rel="stylesheet" href="http://comedian-marilyn-35201.bitballoon.com/build/hsapp-latest.css"/>
+    <script src="http://comedian-marilyn-35201.bitballoon.com/build/jquery.js"></script>
+    <script src="http://comedian-marilyn-35201.bitballoon.com/build/react.min.js"></script>
 
 
 </head>

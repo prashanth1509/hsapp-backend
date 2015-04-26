@@ -1,7 +1,7 @@
 <div class="hsapp-footer">
 </div>
 
-<script src="http://localhost:8080/php-apps/tmp/build/hsapp-latest.js"></script>
+<script src="http://comedian-marilyn-35201.bitballoon.com/build/hsapp-latest.js"></script>
 <script type="text/javascript">
 $(document).ready( function() {
     var model = ${modelJSON};
